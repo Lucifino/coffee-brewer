@@ -33,7 +33,7 @@ public sealed class RateLimiterFixture : WebApplicationFactory<Program>
     public void SetDate(int month, int day)
     {
         _timeMock.Setup(t => t.GetUtcNow())
-            .Returns(new DateTimeOffset(2024, month, day, 12, 0, 0, TimeSpan.Zero));
+            .Returns(new DateTimeOffset(2025, month, day, 12, 0, 0, TimeSpan.Zero));
         _timeMock.Setup(t => t.LocalTimeZone)
             .Returns(TimeZoneInfo.Utc);
     }

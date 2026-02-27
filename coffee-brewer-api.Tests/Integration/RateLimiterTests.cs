@@ -8,12 +8,12 @@ public class RateLimiterTests
     // ── Permit limit ──────────────────────────────────────────────────────────
 
     [Fact]
-    public async Task GET_BrewCoffee_After10RequestsWithinWindow_Returns429()
+    public async Task GET_BrewCoffee_After60RequestsWithinWindow_Returns429()
     {
         await using var factory = CreateFactory();
         var client = factory.CreateClient();
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 60; i++)
             await client.GetAsync("/brew-coffee");
 
         var response = await client.GetAsync("/brew-coffee");
@@ -41,7 +41,7 @@ public class RateLimiterTests
         await using var factory = CreateFactory();
         var client = factory.CreateClient();
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 60; i++)
             await client.GetAsync("/brew-coffee");
 
         var response = await client.GetAsync("/brew-coffee");

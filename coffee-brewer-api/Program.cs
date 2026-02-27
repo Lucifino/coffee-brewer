@@ -18,7 +18,7 @@ builder.Services.AddTransient<IBrewerService, BrewerService>();
 // RFC 7807 Problem Details — used by UseExceptionHandler to produce consistent error bodies.
 builder.Services.AddProblemDetails();
 
-// Fixed-window rate limiter: 10 requests per minute per IP address.
+// Fixed-window rate limiter: 60 requests per minute per IP address.
 builder.Services.AddRateLimiter(options =>
 {
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -28,7 +28,7 @@ builder.Services.AddRateLimiter(options =>
             partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown",
             factory: _ => new FixedWindowRateLimiterOptions
             {
-                PermitLimit = 10,
+                PermitLimit = 60,
                 Window = TimeSpan.FromMinutes(1),
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
                 QueueLimit = 0
