@@ -6,7 +6,8 @@ public class BrewFactory
     {
         DrinkType.TEA       => new Tea(),
         DrinkType.HOTCOFEE  => new HotCoffee(),
-        DrinkType.ICEDCOFEE => new IcedCoffee(),
+        //Enable only for extra credit use case
+        //DrinkType.ICEDCOFEE => new IcedCoffee(),
         _ => throw new ArgumentException($"No brewer configured for: {drinkType}")
     };
 }

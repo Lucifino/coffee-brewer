@@ -2,6 +2,8 @@
 public enum DrinkType
 {
     HOTCOFEE,
-    ICEDCOFEE,
+
+    //Enable only for extra credit use case
+    //ICEDCOFEE,
     TEA
 }

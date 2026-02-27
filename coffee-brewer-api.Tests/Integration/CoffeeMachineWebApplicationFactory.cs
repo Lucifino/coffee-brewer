@@ -9,26 +9,33 @@ using Moq;
 namespace coffee_brewer_api.Tests.Integration;
 public class CoffeeMachineWebApplicationFactory : WebApplicationFactory<Program>
 {
-    public Mock<IWeatherService> WeatherMock { get; } = new();
+
+    //Enable only for extra credit use case
+    //public Mock<IWeatherService> WeatherMock { get; } = new();
     public Mock<TimeProvider> TimeProviderMock { get; } = new();
 
     public CoffeeMachineWebApplicationFactory()
     {
         // Sensible defaults: a normal working day, warm Manila weather
         SetDate(month: 6, day: 15);
-        SetTemperature(35.0);
+
+
+        //Enable only for extra credit use case
+        //SetTemperature(35.0);
     }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureServices(services =>
         {
+
+            //Enable only for extra credit use case
             // Replace IWeatherService
-            var weatherDescriptor = services.SingleOrDefault(
-                d => d.ServiceType == typeof(IWeatherService));
-            if (weatherDescriptor is not null)
-                services.Remove(weatherDescriptor);
-            services.AddSingleton(WeatherMock.Object);
+            //var weatherDescriptor = services.SingleOrDefault(
+            //    d => d.ServiceType == typeof(IWeatherService));
+            //if (weatherDescriptor is not null)
+            //    services.Remove(weatherDescriptor);
+            //services.AddSingleton(WeatherMock.Object);
 
             // Replace TimeProvider
             var timeDescriptor = services.SingleOrDefault(
@@ -61,9 +68,11 @@ public class CoffeeMachineWebApplicationFactory : WebApplicationFactory<Program>
             .Returns(TimeZoneInfo.Utc);
     }
 
-    public void SetTemperature(double celsius) =>
-        WeatherMock.Setup(w => w.GetManilaTemperatureAsync())
-            .ReturnsAsync(celsius);
+
+    //Enable only for extra credit use case
+    //public void SetTemperature(double celsius) =>
+    //    WeatherMock.Setup(w => w.GetManilaTemperatureAsync())
+    //        .ReturnsAsync(celsius);
 
     /// Resets the <see cref="BrewMachineV1"/> singleton to its initial state
     /// between tests so each test starts from a clean machine.

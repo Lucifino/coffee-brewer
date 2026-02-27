@@ -6,18 +6,22 @@ using Moq;
 namespace coffee_brewer_api.Tests.Integration;
 public sealed class RateLimiterFixture : WebApplicationFactory<Program>
 {
-    private readonly Mock<IWeatherService> _weatherMock = new();
+
+    //Enable only for extra credit use case
+    //private readonly Mock<IWeatherService> _weatherMock = new();
     private readonly Mock<TimeProvider> _timeMock = new();
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureServices(services =>
         {
-            var weatherDescriptor = services.SingleOrDefault(
-                d => d.ServiceType == typeof(IWeatherService));
-            if (weatherDescriptor is not null)
-                services.Remove(weatherDescriptor);
-            services.AddSingleton(_weatherMock.Object);
+
+            //Enable only for extra credit use case
+            //var weatherDescriptor = services.SingleOrDefault(
+            //    d => d.ServiceType == typeof(IWeatherService));
+            //if (weatherDescriptor is not null)
+            //    services.Remove(weatherDescriptor);
+            //services.AddSingleton(_weatherMock.Object);
 
             var timeDescriptor = services.SingleOrDefault(
                 d => d.ServiceType == typeof(TimeProvider));
@@ -27,8 +31,9 @@ public sealed class RateLimiterFixture : WebApplicationFactory<Program>
         });
     }
 
-    public void SetTemperature(double celsius) =>
-        _weatherMock.Setup(w => w.GetManilaTemperatureAsync()).ReturnsAsync(celsius);
+    //Enable only for extra credit use case
+    //public void SetTemperature(double celsius) =>
+    //    _weatherMock.Setup(w => w.GetManilaTemperatureAsync()).ReturnsAsync(celsius);
 
     public void SetDate(int month, int day)
     {

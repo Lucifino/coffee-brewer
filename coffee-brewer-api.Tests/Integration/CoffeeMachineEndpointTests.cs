@@ -20,9 +20,8 @@ public class CoffeeMachineEndpointTests : IClassFixture<CoffeeMachineWebApplicat
     // ── 200 OK — successful brews 
 
     [Fact]
-    public async Task GET_BrewCoffee_WhenMachineOnlineAndTempAbove30_Returns200WithHotCoffeeMessage()
+    public async Task GET_BrewCoffee_WhenMachineOnline_Returns200WithHotCoffeeMessage()
     {
-        _factory.SetTemperature(35.0); // > 30°C → hot
 
         var response = await _client.GetAsync("/brew-coffee");
 
@@ -32,23 +31,43 @@ public class CoffeeMachineEndpointTests : IClassFixture<CoffeeMachineWebApplicat
             .Should().Be("Your piping hot coffee is ready");
     }
 
-    [Fact]
-    public async Task GET_BrewCoffee_WhenMachineOnlineAndTempAtOrBelow30_Returns200WithIcedCoffeeMessage()
-    {
-        _factory.SetTemperature(30.0); // ≤ 30°C → iced
 
-        var response = await _client.GetAsync("/brew-coffee");
+    //Enable only for extra credit use case
+    //[Fact]
+    //public async Task GET_BrewCoffee_WhenMachineOnlineAndTempAbove30_Returns200WithHotCoffeeMessage()
+    //{
+    //    _factory.SetTemperature(35.0); // > 30°C → hot
 
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
-        var body = await ParseBodyAsync(response);
-        body.GetProperty("message").GetString()
-            .Should().Be("Your refreshing iced coffee is ready");
-    }
+    //    var response = await _client.GetAsync("/brew-coffee");
+
+    //    response.StatusCode.Should().Be(HttpStatusCode.OK);
+    //    var body = await ParseBodyAsync(response);
+    //    body.GetProperty("message").GetString()
+    //        .Should().Be("Your piping hot coffee is ready");
+    //}
+
+
+
+    //Enable only for extra credit use case
+    //[Fact]
+    //public async Task GET_BrewCoffee_WhenMachineOnlineAndTempAtOrBelow30_Returns200WithIcedCoffeeMessage()
+    //{
+    //    _factory.SetTemperature(30.0); // ≤ 30°C → iced
+
+    //    var response = await _client.GetAsync("/brew-coffee");
+
+    //    response.StatusCode.Should().Be(HttpStatusCode.OK);
+    //    var body = await ParseBodyAsync(response);
+    //    body.GetProperty("message").GetString()
+    //        .Should().Be("Your refreshing iced coffee is ready");
+    //}
 
     [Fact]
     public async Task GET_BrewCoffee_SuccessResponse_IncludesValidIso8601PreparedTimestamp()
     {
-        _factory.SetTemperature(35.0);
+
+        //Enable only for extra credit use case
+        //_factory.SetTemperature(35.0);
 
         var response = await _client.GetAsync("/brew-coffee");
 
@@ -80,7 +99,10 @@ public class CoffeeMachineEndpointTests : IClassFixture<CoffeeMachineWebApplicat
 
         // Restore a normal date and brew — machine should still have its full 4 brews
         _factory.SetDate(month: 6, day: 15);
-        _factory.SetTemperature(35.0);
+
+
+        //Enable only for extra credit use case
+        //_factory.SetTemperature(35.0);
 
         for (int i = 0; i < 4; i++)
         {
@@ -95,7 +117,9 @@ public class CoffeeMachineEndpointTests : IClassFixture<CoffeeMachineWebApplicat
     [Fact]
     public async Task GET_BrewCoffee_AfterBrewLimit_Returns503()
     {
-        _factory.SetTemperature(35.0);
+
+        //Enable only for extra credit use case
+        //_factory.SetTemperature(35.0);
 
         // Exhaust the brew limit (4 brews)
         for (int i = 0; i < 4; i++)
@@ -109,7 +133,9 @@ public class CoffeeMachineEndpointTests : IClassFixture<CoffeeMachineWebApplicat
     [Fact]
     public async Task GET_BrewCoffee_RequestAfter503_Returns200BecauseMachineWasRefilled()
     {
-        _factory.SetTemperature(35.0);
+
+        //Enable only for extra credit use case
+        //_factory.SetTemperature(35.0);
 
         for (int i = 0; i < 4; i++)
             await _client.GetAsync("/brew-coffee");
@@ -126,7 +152,9 @@ public class CoffeeMachineEndpointTests : IClassFixture<CoffeeMachineWebApplicat
     [Fact]
     public async Task GET_BrewCoffee_FullBrewCycle_ProducesExpectedStatusSequence()
     {
-        _factory.SetTemperature(35.0);
+
+        //Enable only for extra credit use case
+        //_factory.SetTemperature(35.0);
 
         // Brews 1-4: all 200
         for (int i = 1; i <= 4; i++)

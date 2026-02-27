@@ -56,7 +56,10 @@ public class RateLimiterTests
     {
         var factory = new RateLimiterFixture();
         factory.SetDate(month: 6, day: 15); // not April 1st
-        factory.SetTemperature(35.0);
+
+
+        //Enable only for extra credit use case
+        //factory.SetTemperature(35.0);
         return factory;
     }
 }

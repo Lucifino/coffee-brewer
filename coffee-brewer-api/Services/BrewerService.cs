@@ -1,4 +1,6 @@
 
+using System.IO;
+
 public interface IBrewerService
 {
     Task<BrewResult> BrewAsync();
@@ -9,23 +11,30 @@ public interface IBrewerService
 public class BrewerService : IBrewerService
 {
     private readonly BrewMachine _brewMachine;
-    private readonly IWeatherService _weatherService;
+
+    //Enable only for extra credit use case
+    //private readonly IWeatherService _weatherService;
     private readonly TimeProvider _timeProvider;
 
     public BrewerService(
         BrewMachineV1 brewMachine,
-        IWeatherService weatherService,
+
+        //Enable only for extra credit use case
+        //IWeatherService weatherService,
+
         TimeProvider timeProvider
     )
     {
         _brewMachine = brewMachine;
-        _weatherService = weatherService;
+
+
+        //Enable only for extra credit use case
+        //_weatherService = weatherService;
+        
         _timeProvider = timeProvider;
     }
 
     /// Attempts to brew a coffee, applying pre-brew guards before delegating to the machine.
-    /// The drink type is determined by Manila's current temperature:
-    ///   > 30°C → Hot Coffee, ≤ 30°C → Iced Coffee
     public async Task<BrewResult> BrewAsync()
     {
         var now = _timeProvider.GetLocalNow();
@@ -44,11 +53,18 @@ public class BrewerService : IBrewerService
             return new BrewResult(BrewStatus.Unavailable);
         }
 
-        var temperature = await _weatherService.GetManilaTemperatureAsync();
-        var drinkType = temperature > 30 ? DrinkType.HOTCOFEE : DrinkType.ICEDCOFEE;
+        //Enable only for extra credit use case
+        //var temperature = await _weatherService.GetManilaTemperatureAsync();
+
+        //Enable only for extra credit use case
+        //var drinkType = temperature > 30 ? DrinkType.HOTCOFEE : DrinkType.ICEDCOFEE;
 
         /// Drink is only populated on <see cref="BrewStatus.Success"/>.
-        var drink = _brewMachine.BrewDrink(drinkType);
+        //var drink = _brewMachine.BrewDrink(drinkType);
+
+
+        ///original use case populates <see cref="DrinkType.HOTCOFEE"/> automatically on success
+        var drink = _brewMachine.BrewDrink(DrinkType.HOTCOFEE);
         return new BrewResult(BrewStatus.Success, drink);
     }
 }

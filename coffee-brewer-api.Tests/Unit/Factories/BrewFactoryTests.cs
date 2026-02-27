@@ -29,21 +29,27 @@ public class BrewFactoryTests
         result.brewMessage.Should().Be("Your piping hot coffee is ready");
     }
 
-    [Fact]
-    public void Brew_WithIcedCoffee_ReturnsIcedCoffee()
-    {
-        var result = _sut.Brew(DrinkType.ICEDCOFEE);
 
-        result.Should().BeOfType<IcedCoffee>();
-        result.drinkType.Should().Be(DrinkType.ICEDCOFEE);
-        result.brewMessage.Should().Be("Your refreshing iced coffee is ready");
-    }
+
+    //Enable only for extra credit use case
+    //[Fact]
+    //public void Brew_WithIcedCoffee_ReturnsIcedCoffee()
+    //{
+    //    var result = _sut.Brew(DrinkType.ICEDCOFEE);
+
+    //    result.Should().BeOfType<IcedCoffee>();
+    //    result.drinkType.Should().Be(DrinkType.ICEDCOFEE);
+    //    result.brewMessage.Should().Be("Your refreshing iced coffee is ready");
+    //}
 
     // Parameterised coverage to ensure every enum value is handled
     [Theory]
     [InlineData(DrinkType.TEA,       typeof(Tea))]
     [InlineData(DrinkType.HOTCOFEE,  typeof(HotCoffee))]
-    [InlineData(DrinkType.ICEDCOFEE, typeof(IcedCoffee))]
+
+
+    //Enable only for extra credit use case
+    //[InlineData(DrinkType.ICEDCOFEE, typeof(IcedCoffee))]
     public void Brew_ReturnsCorrectConcreteType_ForEachDrinkType(DrinkType drinkType, Type expectedType)
     {
         var result = _sut.Brew(drinkType);

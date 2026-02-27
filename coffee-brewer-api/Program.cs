@@ -9,9 +9,11 @@ builder.Services.AddSingleton<BrewMachineV1>();
 builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddMemoryCache();
 
+
+//Enable only for extra credit use case
 // Typed HTTP client with standard resilience: retry, circuit breaker, and timeout.
-builder.Services.AddHttpClient<IWeatherService, WeatherService>()
-                .AddStandardResilienceHandler();
+//builder.Services.AddHttpClient<IWeatherService, WeatherService>()
+//                .AddStandardResilienceHandler();
 
 builder.Services.AddTransient<IBrewerService, BrewerService>();
 

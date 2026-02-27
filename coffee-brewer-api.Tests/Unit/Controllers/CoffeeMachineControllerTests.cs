@@ -52,7 +52,14 @@ public class CoffeeMachineControllerTests
     [Fact]
     public async Task BrewCoffee_WhenBrewSucceeds_ResponseBodyContainsPreparedTimestamp()
     {
-        var drink = new IcedCoffee();
+
+        //Enable only for extra credit use case
+        //var drink = new IcedCoffee();
+
+        //disable for for extra credit use case
+        var drink = new HotCoffee();
+
+
         _brewerServiceMock.Setup(s => s.BrewAsync())
             .ReturnsAsync(new BrewResult(BrewStatus.Success, drink));
 

@@ -22,9 +22,11 @@ public class HotCoffee : Drink
 }
 
 
+
+//Enable only for extra credit use case
 /// Represents a brewed cup of hot coffee.
-public class IcedCoffee : Drink
-{
-    public override DrinkType drinkType => DrinkType.ICEDCOFEE;
-    public override string brewMessage => "Your refreshing iced coffee is ready";
-}
+//public class IcedCoffee : Drink
+//{
+//    public override DrinkType drinkType => DrinkType.ICEDCOFEE;
+//    public override string brewMessage => "Your refreshing iced coffee is ready";
+//}

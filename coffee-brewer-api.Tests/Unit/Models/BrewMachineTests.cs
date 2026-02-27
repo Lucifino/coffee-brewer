@@ -28,7 +28,10 @@ public class BrewMachineTests
     [Theory]
     [InlineData(DrinkType.TEA,       typeof(Tea))]
     [InlineData(DrinkType.HOTCOFEE,  typeof(HotCoffee))]
-    [InlineData(DrinkType.ICEDCOFEE, typeof(IcedCoffee))]
+
+
+    //Enable only for extra credit use case
+    //[InlineData(DrinkType.ICEDCOFEE, typeof(IcedCoffee))]
     public void BrewDrink_ReturnsCorrectDrinkType(DrinkType drinkType, Type expectedType)
     {
         var drink = _sut.BrewDrink(drinkType);
@@ -72,11 +75,23 @@ public class BrewMachineTests
     {
         BrewTimes(3);
 
-        var drink = _sut.BrewDrink(DrinkType.ICEDCOFEE);
+
+        //Enable only for extra credit use case
+        //var drink = _sut.BrewDrink(DrinkType.ICEDCOFEE);
+
+        //Disable for extra credit use case
+        var drink = _sut.BrewDrink(DrinkType.HOTCOFEE);
 
         // State has flipped but the drink is still returned
         _sut.state.Should().Be(BrewMachineState.NEED_REFILL);
-        drink.Should().BeOfType<IcedCoffee>();
+
+
+        //Enable only for extra credit use case
+        //drink.Should().BeOfType<IcedCoffee>();
+
+
+        //Disable for extra credit use case
+        drink.Should().BeOfType<HotCoffee>();
     }
 
     // ── Refill 
